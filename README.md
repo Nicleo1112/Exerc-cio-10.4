@@ -1,122 +1,122 @@
-# API RESTful de Tarefas com FastAPI
+# Exercício 10.4 — FastAPI, Docker e Deploy
 
-Projeto baseado em uma API Flask, reimplementado com FastAPI.
+Este projeto consiste em uma API RESTful desenvolvida com **FastAPI**, containerizada com **Docker** e publicada na nuvem utilizando **Azure App Service**.  
+Também foi configurado um pipeline de **CI/CD com GitHub Actions** para realizar o deploy automático a partir do GitHub.
 
-## Como executar no PyCharm
+## Link da aplicação
 
-1. Abra esta pasta no PyCharm.
-2. Abra o terminal do PyCharm.
-3. Instale as dependências:
+https://exercicio104-fastapi-duapexfhh4cqb0df.eastus-01.azurewebsites.net/
 
-```bash
-pip install -r requirements.txt
-```
+## Documentação da API
 
-4. Execute a API com Uvicorn:
+https://exercicio104-fastapi-duapexfhh4cqb0df.eastus-01.azurewebsites.net/docs
 
-```bash
-uvicorn main:app --reload
-```
+## Tecnologias utilizadas
 
-5. Acesse no navegador:
+- Python
+- FastAPI
+- Uvicorn
+- Docker
+- Azure App Service
+- GitHub Actions
+- Postman
 
-```text
-http://127.0.0.1:8000
-```
+## Funcionalidades da API
+
+A API permite realizar operações CRUD de tarefas:
+
+- Listar tarefas
+- Buscar tarefa por ID
+- Criar nova tarefa
+- Atualizar tarefa existente
+- Remover tarefa
 
 ## Rotas da API
 
-### Listar tarefas
+| Método | Rota | Descrição |
+|---|---|---|
+| GET | `/` | Página inicial da API |
+| GET | `/api/tasks` | Lista todas as tarefas |
+| GET | `/api/tasks/{task_id}` | Busca uma tarefa pelo ID |
+| POST | `/api/tasks` | Cria uma nova tarefa |
+| PUT | `/api/tasks/{task_id}` | Atualiza uma tarefa existente |
+| DELETE | `/api/tasks/{task_id}` | Remove uma tarefa |
 
-```http
-GET /api/tasks
-```
+## Exemplo de requisição POST
 
-### Buscar tarefa por ID
-
-```http
-GET /api/tasks/1
-```
-
-### Criar tarefa
+Endpoint:
 
 ```http
 POST /api/tasks
-```
 
-Exemplo de JSON:
+Body JSON:
 
-```json
 {
-  "titulo": "Estudar FastAPI",
+  "titulo": "Testar API na nuvem",
   "status": "Pendente"
 }
-```
 
-### Atualizar tarefa
+Resposta esperada:
 
-```http
-PUT /api/tasks/1
-```
-
-Exemplo de JSON:
-
-```json
 {
-  "titulo": "Aprender FastAPI",
-  "status": "Concluído"
+  "id": 3,
+  "titulo": "Testar API na nuvem",
+  "status": "Pendente"
 }
-```
+Como executar localmente
 
-### Remover tarefa
+Instale as dependências:
 
-```http
-DELETE /api/tasks/1
-```
+pip install -r requirements.txt
 
-## Documentação automática
+Execute a aplicação:
+
+uvicorn main:app --reload
+
+Acesse no navegador:
+
+http://localhost:8000
+
+Documentação local:
+
+http://localhost:8000/docs
+Como executar com Docker
+
+Crie a imagem Docker:
+
+docker build -t api-fastapi-104 .
+
+Execute o container:
+
+docker run -d -p 8000:8000 --name container-api-104 api-fastapi-104
 
 Acesse:
 
-```text
-http://127.0.0.1:8000/docs
-```
+http://localhost:8000
 
-## Prints para entrega
+Documentação:
 
-Inclua no trabalho:
+http://localhost:8000/docs
+Estrutura do projeto
+.
+├── main.py
+├── requirements.txt
+├── Dockerfile
+├── .dockerignore
+└── README.md
+Deploy
 
-1. Print do PyCharm com o terminal executando:
+A aplicação foi publicada no Azure App Service.
 
-```bash
-uvicorn main:app --reload
-```
+O deploy automático foi configurado utilizando GitHub Actions, permitindo que alterações enviadas para a branch principal do repositório sejam implantadas automaticamente na aplicação hospedada na nuvem.
 
-2. Print do navegador acessando:
+Testes com Postman
 
-```text
-http://127.0.0.1:8000
-```
+A API foi testada utilizando o Postman com os seguintes endpoints:
 
-3. Print do navegador acessando:
-
-```text
-http://127.0.0.1:8000/api/tasks
-```
-
-ou:
-
-```text
-http://127.0.0.1:8000/docs
-```
-
-## Subir no GitHub
-
-```bash
-git init
-git add .
-git commit -m "API RESTful com FastAPI"
-git branch -M main
-git remote add origin https://github.com/SEU_USUARIO/api-fastapi-tarefas.git
-git push -u origin main
-```
+GET https://exercicio104-fastapi-duapexfhh4cqb0df.eastus-01.azurewebsites.net/
+GET https://exercicio104-fastapi-duapexfhh4cqb0df.eastus-01.azurewebsites.net/api/tasks
+GET https://exercicio104-fastapi-duapexfhh4cqb0df.eastus-01.azurewebsites.net/api/tasks/1
+POST https://exercicio104-fastapi-duapexfhh4cqb0df.eastus-01.azurewebsites.net/api/tasks
+PUT https://exercicio104-fastapi-duapexfhh4cqb0df.eastus-01.azurewebsites.net/api/tasks/1
+DELETE https://exercicio104-fastapi-duapexfhh4cqb0df.eastus-01.azurewebsites.net/api/tasks/1
